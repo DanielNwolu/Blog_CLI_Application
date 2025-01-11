@@ -1,0 +1,15 @@
+{
+  "name": "simple_blog_cli_application",
+  "version": "1.0.0",
+  "description": "this app is for a blog cli application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Daniel Nwolu (BE)",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
