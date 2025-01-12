@@ -1,10 +1,8 @@
-// A SIMPLE BLOG CLI APPLICATION WITH EMOJIS
 const prompt = require('prompt-sync')({ sigint: true });
 const fs = require("fs");
 
 let dbFilePath = "./database.json";
 
-// Check if database file exists, else initialize it
 if (!fs.existsSync(dbFilePath)) {
     fs.writeFileSync(dbFilePath, JSON.stringify([]), "utf-8");
 }
@@ -13,7 +11,7 @@ let db = fs.readFileSync(dbFilePath, "utf-8");
 let blogs = db ? JSON.parse(db) : [];
 
 const appTitle = 'Your Blog App';
-console.clear(); // Clears the console to keep it clean and consistent
+console.clear();
 console.log(`🚀 Welcome to ${appTitle} 🚀\n`);
 
 function createBlog({ title, content, author }) {
