@@ -16,7 +16,7 @@ const appTitle = 'Your Blog App';
 console.clear(); // Clears the console to keep it clean and consistent
 console.log(`🚀 Welcome to ${appTitle} 🚀\n`);
 
-function createPost({ title, content, author }) {
+function createBlog({ title, content, author }) {
     const errors = [];
 
     if (!title || title.length < 5 || title.length > 100) {
@@ -30,14 +30,13 @@ function createPost({ title, content, author }) {
     }
 
     if (errors.length > 0) {
-        console.log(lineBreak);
-        console.log("⚠️ Error(s) creating post:");
+        console.log("\n ⚠️ Error(s) creating blog:");
         errors.forEach(error => console.log(`- ${error}`));
-        console.log(lineBreak);
+        console.log("\n")
         return;
     }
 
-    const post = {
+    const blog = {
         id: generate_id(),
         title,
         content,
@@ -45,72 +44,70 @@ function createPost({ title, content, author }) {
         createdAt: new Date(),
         updatedAt: new Date(),
     };
-    blogs.push(post);
-    console.log(`\n✅ Post with title "${title}" was created and saved successfully! 🎉\n`);
+    blogs.push(blog);
+    console.log(`\n✅ Blog with title "${title}" was created and saved successfully! 🎉\n`);
 }
 
 function generate_id() {
     return Math.floor(100 + Math.random() * 900);
 }
 
-function viewAllPosts() {
+function viewAllBlogs() {
     if (blogs.length === 0) {
-        console.log(lineBreak);
-        console.log("🗂️ No posts available! Start by creating one. 📝");
-        console.log(lineBreak);
+        console.log("\n🗂️ No Blog available! Start by creating one. 📝\n");
         return;
     }
-    console.log("\n✨✨✨ Your Blog Posts ✨✨✨");
-    blogs.forEach((post, index) => {
-        console.log(`\n📖 ${index + 1}. Title: "${post.title}" (ID: ${post.id})\n`);
+    console.log("\n✨✨✨ Your Blogs ✨✨✨");
+    blogs.forEach((blog, index) => {
+        console.log(`\n📖 ${index + 1}. Title: "${blog.title}" (ID: ${blog.id})\n`);
     });
 }
 
-function viewPostById(id) {
-    const post = blogs.find(p => p.id === id);
-    if (post) {
-        console.log(`\n📰 Title: ${post.title}`);
-        console.log(`📜 Content: ${post.content}`);
-        console.log(`✍️  Author: ${post.author}`);
-        console.log(`📅 Created At: ${post.createdAt}`);
-        console.log(`🔄 Updated At: ${post.updatedAt}\n`);
+function viewBlogById(id) {
+    const blog = blogs.find(p => p.id === id);
+    if (blog) {
+        console.log(`\n📰 Title: ${blog.title}`);
+        console.log(`📜 Content: ${blog.content}`);
+        console.log(`✍️  Author: ${blog.author}`);
+        console.log(`📅 Created At: ${blog.createdAt}`);
+        console.log(`🔄 Updated At: ${blog.updatedAt}\n`);
     } else {
-        console.log("\n❌ Post not found! Please try again. 🙁\n");
+        console.log("\n❌ Blog not found! Please try again. 🙁\n");
     }
 }
 
-function deletePostById(id) {
+function deleteBlogById(id) {
     const index = blogs.findIndex(p => p.id === id);
     if (index !== -1) {
         blogs.splice(index, 1);
-        console.log("\n🗑️  Post deleted successfully! ✅\n");
+        console.log("\n🗑️  Blog deleted successfully! ✅\n");
     } else {
-        console.log("\n❌ Post not found! Please try again. 🙁\n");
+        console.log("\n❌ Blog not found! Please try again. 🙁\n");
     }
 }
 
-function editPostById(id) {
-    const post = blogs.find(p => p.id === id);
+function editBlogById(id) {
+    const blog = blogs.find(p => p.id === id);
     const index = blogs.findIndex(p => p.id === id);
-    if (post) {
+    if (blog) {
         const title = prompt(`✏️ Edit the title: `);
         const content = prompt('✏️ Edit the content: ');
         const author = prompt('✏️ Edit the author\'s name: ');
 
         if (title) {
-            post.title = title;
+            blog.title = title;
         }
         if (content) {
-            post.content = content;
+            blog.content = content;
         }
         if (author) {
-            post.author = author;
+            blog.author = author;
         }
-        post.updatedAt = new Date();
-        blogs[index] = post;
-        console.log("\n✅ Post edited successfully! 🎉\n");
+        blog.updatedAt = new Date();
+        blogs[index] = blog;
+        console.log("\n✅ Blog edited successfully! 🎉\n");
     } else {
-        console.log("\n❌ Post not found! Please try again. 🙁");
+        console.log("\n❌ Blog not found! Please try again. 🙁\n");
     }
 }
 
@@ -124,11 +121,11 @@ function saveBlog() {
 let userIsDone = false;
 while (!userIsDone) {
     console.log('🌟 MAIN MENU 🌟');
-    console.log('1. 📝 Create Post');
-    console.log('2. 📖 View All Posts');
-    console.log('3. 🔍 View a Post');
-    console.log('4. ✏️  Edit a Post');
-    console.log('5. 🗑️  Delete a Post');
+    console.log('1. 📝 Create a Blog');
+    console.log('2. 📖 View All Blogs');
+    console.log('3. 🔍 View a Blog');
+    console.log('4. ✏️  Edit a Blog');
+    console.log('5. 🗑️  Delete a Blog');
     console.log('6. 🚪 Exit');
 
     const choice = parseInt(prompt('🎯 Enter your choice: '));
@@ -136,18 +133,18 @@ while (!userIsDone) {
         const title = prompt('📋 Enter the title: ');
         const content = prompt('🖋️ Enter the content: ');
         const author = prompt('✍️ Enter the author\'s name: ');
-        createPost({ title, content, author });
+        createBlog({ title, content, author });
     } else if (choice === 2) {
-        viewAllPosts();
+        viewAllBlogs();
     } else if (choice === 3) {
-        const id = parseInt(prompt("🔍 Enter the Post ID: "));
-        viewPostById(id);
+        const id = parseInt(prompt("🔍 Enter the Blog ID: "));
+        viewBlogById(id);
     } else if (choice === 4) {
-        const id = parseInt(prompt("✏️ Enter the Post ID to Edit: "));
-        editPostById(id);
+        const id = parseInt(prompt("✏️ Enter the Blog ID to Edit: "));
+        editBlogById(id);
     } else if (choice === 5) {
-        const id = parseInt(prompt("🗑️ Enter the Post ID to Delete: "));
-        deletePostById(id);
+        const id = parseInt(prompt("🗑️ Enter the Blog ID to Delete: "));
+        deleteBlogById(id);
     } else if (choice === 6) {
         saveBlog();
     } else {
